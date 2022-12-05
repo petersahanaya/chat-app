@@ -1,0 +1,41 @@
+{
+	"name": "kit-template-default",
+	"version": "0.0.1",
+	"scripts": {
+		"dev": "vite dev",
+		"build": "vite build",
+		"preview": "vite preview",
+		"check": "svelte-kit sync && svelte-check --tsconfig ./jsconfig.json",
+		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./jsconfig.json --watch",
+		"lint": "prettier --plugin-search-dir . --check .",
+		"format": "prettier --plugin-search-dir . --write ."
+	},
+	"devDependencies": {
+		"@beyonk/svelte-social-auth": "^3.0.0",
+		"@fontsource/fira-mono": "^4.5.10",
+		"@neoconfetti/svelte": "^1.0.0",
+		"@sveltejs/adapter-auto": "next",
+		"@sveltejs/kit": "next",
+		"@types/cookie": "^0.5.1",
+		"autoprefixer": "^10.4.13",
+		"postcss": "^8.4.19",
+		"prettier": "^2.8.0",
+		"prettier-plugin-svelte": "^2.8.1",
+		"svelte": "^3.53.1",
+		"svelte-check": "^2.9.2",
+		"svelte-preprocess": "^4.10.7",
+		"tailwindcss": "^3.2.4",
+		"typescript": "^4.9.3",
+		"vite": "^3.2.4"
+	},
+	"type": "module",
+	"dependencies": {
+		"@auth0/auth0-spa-js": "^2.0.0",
+		"bcrypt": "^5.1.0",
+		"jsonwebtoken": "^8.5.1",
+		"mysql2": "^2.3.3",
+		"sequelize": "^6.26.0",
+		"svelte-icons": "^2.1.0",
+		"sveltekit-passport-oauth2": "^0.0.6"
+	}
+}
