@@ -1,8 +1,7 @@
 import { DataTypes, Sequelize } from "sequelize";
-import { DB_NAME, DB_HOST, DB_PASSWORD, DB_USERNAME } from '$env/static/private'
 
-export const sequelize = new Sequelize(DB_NAME, DB_USERNAME!,  DB_PASSWORD!, {
-    host : DB_HOST,
+export const sequelize = new Sequelize(import.meta.env.VITE_DB_NAME!, import.meta.env.VITE_DB_USERNAME!,  import.meta.env.VITE_DB_PASSWORD!, {
+    host : import.meta.env.VITE_DB_HOST!,
     dialect : "mysql"
 })
 
