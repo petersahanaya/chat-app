@@ -18,7 +18,7 @@
 	};
     let input : string = '';
 
-	const socket = io();
+	const socket = io(import.meta.env.VITE_PORT_IO);
 	sockets.set(socket);
 
 	$: socket.emit('on-join', client);
