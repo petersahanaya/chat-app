@@ -1,11 +1,9 @@
 import { invalid, redirect } from "@sveltejs/kit";
 import type { Actions } from "@sveltejs/kit";
 import { User } from "$lib/models/index";
-import { ACCESS_TOKEN, REFRESH_TOKEN } from "$env/static/private";
 import bcrypt from 'bcrypt'
 import JWT from 'jsonwebtoken'
 import type { UserProps } from "$lib/stores/auth";
-import { JWTCheck } from "$lib/middleware";
 
 export const actions : Actions = {
     login : async ({request, cookies}) => {
@@ -22,9 +20,9 @@ export const actions : Actions = {
 
         if(!match) return invalid(400, {msg : "incorrect password.."})
 
-        const accessToken = JWT.sign({username, id : find.userId!, email : find.email, image : find.image}, ACCESS_TOKEN!, {expiresIn : "15m"})
+        const accessToken = JWT.sign({username, id : find.userId!, email : find.email, image : find.image}, import.meta.env.VITE_ACCESS_TOKEN!, {expiresIn : "15m"})
 
-        const refreshToken = JWT.sign({username, id : find.userId!, email : find.email, image : find.image}, REFRESH_TOKEN!, {expiresIn : "30d"})
+        const refreshToken = JWT.sign({username, id : find.userId!, email : find.email, image : find.image}, import.meta.env.VITE_REFRESH_TOKEN!, {expiresIn : "30d"})
 
         cookies.set('token', accessToken, {path : "/", httpOnly : true, expires : new Date(Date.now() + 1000 * 60 * 15)})
 

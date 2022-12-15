@@ -2,7 +2,6 @@
 	import FaAngleLeft from 'svelte-icons/fa/FaAngleLeft.svelte';
 	import FaUserEdit from 'svelte-icons/fa/FaUserEdit.svelte';
 	import { fade } from 'svelte/transition';
-	import { PUBLIC_CLOUD_NAME } from '$env/static/public';
 	import { goto } from '$app/navigation';
 	export let data: { user: { username: string; email: string; image: string | null } };
 
