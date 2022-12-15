@@ -1,5 +1,4 @@
 import { redirect, type ServerLoad, type Redirect } from '@sveltejs/kit';
-import { ACCESS_TOKEN, REFRESH_TOKEN } from '$env/static/private';
 import JWT from 'jsonwebtoken';
 import type { UserProps } from '$lib/types';
 
@@ -9,7 +8,7 @@ export const load: ServerLoad = async ({ cookies }) => {
 	let user: UserProps | any;
 
 	if (!token && refreshToken) {
-		JWT.verify(refreshToken, REFRESH_TOKEN, (err, decoded: any) => {
+		JWT.verify(refreshToken, import.meta.env.VITE_REFRESH_TOKEN, (err : any, decoded: any) => {
 			console.log(decoded);
 
 			if (err) throw redirect(307, '/auth/register');
@@ -22,7 +21,7 @@ export const load: ServerLoad = async ({ cookies }) => {
 					image: decoded.image,
 					userId: decoded.userId
 				},
-				ACCESS_TOKEN,
+				import.meta.env.VITE_ACCESS_TOKEN,
 				{ expiresIn: '15m' }
 			);
 
@@ -43,7 +42,7 @@ export const load: ServerLoad = async ({ cookies }) => {
 	if (!token && !refreshToken) throw redirect(307, '/auth/register');
 
 	if (token && refreshToken) {
-		JWT.verify(token, ACCESS_TOKEN, (err, decoded) => {
+		JWT.verify(token, import.meta.env.VITE_ACCESS_TOKEN, (err : any, decoded : any) => {
 			console.log(err?.message);
 			if (err) return console.log('Error access Token redirected..');
 
