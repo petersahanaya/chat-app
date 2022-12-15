@@ -1,41 +1,60 @@
 <script lang='ts'>
     import FaGoogle from 'svelte-icons/fa/FaGoogle.svelte'
+    import Error from '$lib/components/Error.svelte';
     import { enhance } from '$app/forms';
 
-    export let data : any;
+    export let form: {msg : string};
+    let toggle = false
+    $: { 
+        if(form?.msg)  {
+            toggle = true
 
-    $: console.log(data)
+            setTimeout(() => {
+                toggle = false
+            }, 1500)
+        }
+    }
+
 </script>
 
+{#if toggle}
+    <Error data={form.msg}/>
+{/if}
 
-<main class='w-screen h-screen bg-slate-100 flex flex-col justify-center items-center'>
+
+<svelte:head>
+    <title>Register - p3chat</title>
+    <meta name="description" content="Register and find out how to meet your friend's!">
+</svelte:head>
+
+<main class='w-screen h-screen bg-stone-800 flex flex-col justify-center items-center'>
     <form method="POST" action="?/register" use:enhance class='flex flex-col justify-center items-center gap-4'>
         <nav class="mb-[3rem] w-[17rem]">
-            <h4 class="text-4xl text-stone-800 mb-3">Register</h4>
-            <p class='text-[.8rem] text-stone-600'>Create and account and interact with your friend's</p>
+            <h4 class="text-6xl text-white mb-3">Register</h4>
+            <p class='text-[.8rem] text-stone-300'>Create and account and interact with your friend's</p>
         </nav>
         <section class="flex justify-around items-center gap-1 bg-white transition-[200ms] border-[.4px] border-stone-600 rounded-lg w-[17rem] hover:bg-stone-200 p-3 ">
             <p class="text-stone-700">Login with</p>
             <button class="w-5 h-5 text-stone-700">
                 <FaGoogle/>
-            </button>
+            </button> 
         </section>
         <section class='flex flex-col justify-center gap-1'>
-            <label class="text-stone-600" for="username">Username</label>
-            <input minlength="4" required name='username'  class="bg-white rounded-md p-3 w-[17rem] placeholder:text-[.8rem]" id="username" type="text" placeholder="e.g sarah wong">
+            <label class="text-stone-400" for="username">Username</label>
+            <input minlength="4" required name='username'  class="bg-stone-700 outline-none text-white rounded-md p-3 w-[17rem] placeholder:text-[.8rem]  placeholder:text-stone-400" id="username" type="text" placeholder="e.g sarah wong">
         </section>
         <section class='flex flex-col justify-center gap-1'>
-            <label class="text-stone-600" for="username">Email</label>
-            <input minlength="8" required name='email' type='email' class="bg-white rounded-md p-3 w-[17rem] placeholder:text-[.8rem]" id="username"  placeholder="e.g sarah@example.com">
+            <label class="text-stone-400" for="username">Email</label>
+            <input minlength="8" required name='email' type='email' class="bg-stone-700 outline-none text-white rounded-md p-3 w-[17rem] placeholder:text-[.8rem] placeholder:text-stone-400 " id="username"  placeholder="e.g sarah@example.com">
         </section>
         <section class='flex flex-col justify-center gap-1'>
-            <label class="text-stone-600" for="password">Password</label>
-            <input minlength="4" required name="password" type='password' class="bg-white rounded-md p-3 w-[17rem] placeholder:text-[.8rem]" placeholder="e.g secret">
+            <label class="text-stone-400" for="password">Password</label>
+            <input minlength="4" required name="password" type='password' class="bg-stone-700 outline-none text-white rounded-md p-3 w-[17rem] placeholder:text-[.8rem] placeholder:text-stone-400" placeholder="e.g secret">
         </section>
-            <button type="submit" class="bg-sky-500 text-white p-3 w-[12rem] rounded-lg text-[.9rem] transition-[200ms] hover:bg-sky-700">Submit</button>
+            <button type="submit" class="bg-[greenyellow] text-stone-800  p-3 w-[12rem] rounded-lg text-[.9rem] transition-[200ms] hover:bg-[#a8c914]">Submit</button>
 
         <section class='mt-[1rem] flex justify-around items-center gap-3'>
-            <p class='text-[.9rem] text-stone-700'>Already have an account?</p>
+            <p class='text-[.9rem] text-stone-300'>Already have an account?</p>
             <a class='text-sky-500 border-b-[1px] border-b-sky-600' href="/auth/login">Sign-in</a>
         </section>
     </form>

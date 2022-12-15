@@ -11,13 +11,14 @@ export const actions : Actions = {
         if(!(username && password && email)) return invalid(401, {msg : "Username, Password & Email are Required..."})
 
         const duplicate = await User.findOne({where : {username}})
+        console.log(duplicate)
 
-        if(duplicate) return invalid(401, {msg : "Another user already user this username.."})
+        if(duplicate) return invalid(400, {username, msg : "Another user already user this username.."})
 
         const hashPassword = await bcrypt.hash(password , 10)
 
-        await User.create({username, password : hashPassword, email})
+        await User.create({username, password : hashPassword, email, userId : crypto.randomUUID()})
 
-        throw redirect(301, "/auth/login")
+        throw redirect(307, "/auth/login")
     }
 }

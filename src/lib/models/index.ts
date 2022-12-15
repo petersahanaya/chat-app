@@ -16,6 +16,9 @@ export const User = sequelize.define('users', {
     password : {
         type : DataTypes.STRING
     },
+    userId : {
+        type : DataTypes.STRING()
+    },
     token : {
         type : DataTypes.TEXT('long')
     },
